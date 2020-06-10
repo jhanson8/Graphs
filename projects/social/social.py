@@ -81,16 +81,27 @@ class SocialGraph:
         #start at  given user id, do a bft, return the path to each friend 
 
         #1.Create queue
+        q = Queue()
         #2.Enqueue path 
+        q.enqueue([user_id])
         #3.Create visited
         visited = {}  # Note that this is a dictionary, not a set
 
-        #while queue is not empty 
-            #dequeue first path 
+        #while queue is not empty
+        while q.size() > 0: 
+            #dequeue first path
+            path = q.dequeue()
+            vertex = path[-1]
             # if not visited 
-                #add to visited 
+            if vertex not in visited:
+                #add to visited
+                visited[vertex] = path  
                 #for each neighbor
-                    #copy path and enqueue  
+                for neighbor in self.friendships[vertex]:
+                    #copy path and enqueue
+                    new_path = path.copy()
+                    new_path.append(neighbor)
+                    q.enqueue(new_path)  
 
 
     
@@ -99,7 +110,14 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(10, 2)
-    print(sg.friendships)
+    sg.populate_graph(1000, 5)
+    # print("Friendships:")
+    # print(sg.friendships)
     connections = sg.get_all_social_paths(1)
-    print(connections)
+    # print("Connections:")
+    # print(connections)
+
+    total_social_paths = 0 
+    for user_id in connections:
+        total_social_paths += len(connections[user_id])
+    print(f"Avg. degree of separation: {total_social_paths/len(connections)}")
