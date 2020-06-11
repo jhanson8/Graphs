@@ -53,7 +53,7 @@ We would need to call 'add_friendship()' 100 * 10 times b/c on average each user
 2. If you create 1000 users with an average of 5 random friends each, what percentage of other users will be in a particular user's extended social network? What is the average degree of separation between a user and those in his/her extended network?
 
 We can find the average degree of separation by dividing the total number of social paths for all users by the total number of connections. When I test this the answer is between 5 and 6.
-0.5% of users will be in a particular users extended network.
+99.5% of users will be in a particular users extended network.
 
 
 ## 4. Stretch Goal

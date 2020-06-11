@@ -117,6 +117,13 @@ if __name__ == '__main__':
     # print("Connections:")
     # print(connections)
 
+    
+    users_ext_net = len(connections)
+    total_users = len(sg.users)
+
+    print(f'Percentage: {users_ext_net/total_users * 100: .2f}')
+
+    
     total_social_paths = 0 
     for user_id in connections:
         total_social_paths += len(connections[user_id])
